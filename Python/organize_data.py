@@ -2,20 +2,6 @@ import os
 import youtube_services
 import json
 
-# 1 Read the list of the countries that we will be analyzing.
-# 2 For every country in the countries list
-# 2.1 collect the comments from the videos that re not null
-# 2.2 Save the comments to CSVs with filenames in this format <country><videoName>.csv
-COUNTRIES_LIST_FILENAME = 'allCountriesYTLinks.json'
-# COUNTRIES_LIST_FILENAME = 'testList.json'
-YT_VIDEO_TYPES_TO_INCLUDE = ["music-video"]
-DATA_FOLDER = 'D:\GitHub Repositories\Eurovision data\Eurovision-Youtube-Comments\Data'
-COUNTRIES_TO_ANALYZE_SEMI2 = ["San Marino", "Estonia", "Czech Republic", "Greece", "Austria", "Poland", "Moldova",
-                              "Iceland", "Serbia", "Georgia", "Albania", "Portugal", "Bulgaria", "Finland", "Latvia", "Switzerland", "Denmark"]
-
-COUNTRIES_TO_ANALYZE_SEMI1 = ["Lithuania", "Slovenia", "Russia", "Sweden", "Australia", "North Macedonia",
-                              "Ireland", "Cyprus", "Norway", "Croatia", "Belgium", "Israel", "Romania", "Azerbaijan", "Ukraine", "Malta"]
-
 
 def count_country_types(countriesDict, countries_to_include, video_type):
     countDict = {}
