@@ -49,7 +49,8 @@ def analyze_data(data_folder, countries_competing, videoes_types_to_include):
         country_names, countries_competing, data_folder, videoes_types_to_include)
     make_json(countries_points, DATA_FOLDER_FINAL, 'country_points')
     counted = analyze_data_tuples.count_up_all_points(countries_points)
-    print('We have a winnder!')
+    print(counted)
+    print('We have a winner!')
     print(f'The winner is: {counted[0]}')
     make_json(counted, DATA_FOLDER_FINAL, 'winner')
 
