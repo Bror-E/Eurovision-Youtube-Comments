@@ -19,11 +19,13 @@ VIDEO_TYPES_TO_INCLUDE = ['music-video', 'semi-final']
 
 
 def get_data(countries_filename, data_folder, countries_to_get_data, video_types_to_include):
-    countries_dict = load_countries_list(countries_filename)
-    countries_dict['countries'] = {country: videoes for country,
-                                   videoes in countries_dict['countries'].items() if country in countries_to_get_data}
-    organize_data.create_data_sets(
-        countries_dict, video_types_to_include, data_folder)
+    countries_dict = load_countries_list(
+        os.path.join(data_folder, countries_filename))
+    print(countries_dict)
+    # countries_dict['countries'] = {country: videoes for country,
+    #                               videoes in countries_dict['countries'].items() if country in countries_to_get_data}
+    # organize_data.create_data_sets(
+    #    countries_dict, video_types_to_include, data_folder)
 
 
 def load_countries_list(filename):
@@ -56,7 +58,7 @@ def analyze_data(data_folder, countries_competing, videoes_types_to_include):
 
 
 if __name__ == "__main__":
-    # get_data(COUNTRIES_LIST_FILENAME, DATA_FOLDER_FINAL,
-    #         COUNTRIES_IN_FINALE, VIDEO_TYPES_TO_INCLUDE)
+    get_data(COUNTRIES_LIST_FILENAME, DATA_FOLDER_FINAL,
+             COUNTRIES_IN_FINALE, VIDEO_TYPES_TO_INCLUDE)
     analyze_data(DATA_FOLDER_FINAL, COUNTRIES_IN_FINALE,
                  VIDEO_TYPES_TO_INCLUDE)
