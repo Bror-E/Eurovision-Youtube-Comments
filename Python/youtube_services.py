@@ -37,17 +37,11 @@ def get_comments(part="snippet",
                  maxResults=100,
                  textFormat="plainText",
                  order="time",
-                 videoId=get_video_id_from_url(test_url),
+                 videoId='',
                  csv_filename="empty",
                  csv_path=''):
-
-    # 3 create empty lists to store desired information
-    comments, commentsId, repliesCount, likesCount, viewerRating = [], [], [], [], []
-
-    # build our service from path/to/apikey
+    comments = []
     service = build_youtube_data_v3_service(API_KEY_FILENAME)
-
-    # 4 make an API call using our service
     response = service.commentThreads().list(
         part=part,
         maxResults=maxResults,
@@ -59,17 +53,12 @@ def get_comments(part="snippet",
     while response:  # this loop will continue to run until you max out your quota
         print(f'Getting comments {counter} -> {counter+maxResults}')
         for item in response["items"]:
-            # 5 index item for desired data features
             comment = item["snippet"]["topLevelComment"]["snippet"]["textDisplay"].rstrip(
                 '\n')
-            # 6 append to lists
             comments.append(comment)
-
-            # 7 write line by line
             with codecs.open(os.path.join(csv_path, csv_filename), "a+", encoding="utf-16") as f:
                 csv_writer = writer(f)
                 csv_writer.writerow([comment])
-        # 8 check for nextPageToken, and if it exists, set response equal to the JSON response
         if "nextPageToken" in response:
             response = service.commentThreads().list(
                 part=part,
@@ -82,10 +71,3 @@ def get_comments(part="snippet",
         else:
             break
         counter += maxResults
-    # 9 return our data of interest
-    return {
-        "Comments": comments,
-        "Comment ID": commentsId,
-        "Reply Count": repliesCount,
-        "Like Count": likesCount
-    }
